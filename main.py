@@ -123,7 +123,7 @@ def question1():
         except Exception as err:
             return render_template('question1.html', error=f"Invalid input: {err}")
 
-    return render_template('question1.html')
+    return render_template('Question1.html')
 
 
 
@@ -316,7 +316,7 @@ def question3():
         except Exception as err:
             return render_template("question3.html", error=f"Invalid input: {err}")
 
-    return render_template("question3.html")
+    return render_template("Question3.html")
 
 
 
