@@ -118,10 +118,10 @@ def question1():
             # ⬅️ توليد التفسير من GPT
             explanation = generate_explanation(story_prompt)
 
-            return render_template('question1.html', inputs=inputs, results=results, explanation=explanation)
+            return render_template('Question1.html', inputs=inputs, results=results, explanation=explanation)
 
         except Exception as err:
-            return render_template('question1.html', error=f"Invalid input: {err}")
+            return render_template('Question1.html', error=f"Invalid input: {err}")
 
     return render_template('Question1.html')
 
@@ -311,10 +311,10 @@ def question3():
             # ⬅️ توليد التفسير القصصي
             explanation = generate_explanation(story_prompt)
 
-            return render_template("question3.html", inputs=inputs, results=results, explanation=explanation)
+            return render_template("Question3.html", inputs=inputs, results=results, explanation=explanation)
 
         except Exception as err:
-            return render_template("question3.html", error=f"Invalid input: {err}")
+            return render_template("Question3.html", error=f"Invalid input: {err}")
 
     return render_template("Question3.html")
 
