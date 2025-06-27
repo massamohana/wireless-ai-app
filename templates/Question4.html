@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 4 – Cellular System Design</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Cellular System Design</h2>
+
+    <form method="post">
+        <!-- جميع حقول الإدخال بدون تغيير -->
+        <div class="form-group">
+            <label>Total Area (km²):</label>
+            <input type="number" step="any" name="total_area" required>
+        </div>
+
+        <div class="form-group">
+            <label>Maximum Number of Users:</label>
+            <input type="number" name="max_num_users" required>
+        </div>
+
+        <div class="form-group">
+            <label>Average Call Duration:</label>
+            <input type="number" step="any" name="avg_call_duration" required>
+        </div>
+        <div class="form-group">
+            <label>Call Duration Unit:</label>
+            <select name="avg_call_duration_unit">
+                <option value="seconds">seconds</option>
+                <option value="minutes">minutes</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Average Call Rate per User:</label>
+            <input type="number" step="any" name="avg_call_rate_per_user" required>
+        </div>
+
+        <div class="form-group">
+            <label for="GOS">Grade of Service (GOS):</label>
+            <input type="text" name="GOS" placeholder="e.g., 0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label>Signal-to-Interference Ratio (SIR):</label>
+            <input type="number" step="any" name="SIR" required>
+        </div>
+        <div class="form-group">
+            <label>SIR Unit:</label>
+            <select name="SIR_unit">
+                <option value="dB">dB</option>
+                <option value="Unitless">Unitless</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Reference Power P₀:</label>
+            <input type="number" step="any" name="P0" required>
+        </div>
+        <div class="form-group">
+            <label>P₀ Unit:</label>
+            <select name="P0_unit">
+                <option value="dB">dB</option>
+                <option value="Watt">Watt</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Receiver Sensitivity:</label>
+            <input type="number" step="any" name="receiver_sensitivity" required>
+        </div>
+        <div class="form-group">
+            <label>Sensitivity Unit:</label>
+            <select name="receiver_sensitivity_unit">
+                <option value="dB">dB</option>
+                <option value="Watt">Watt</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Reference Distance d₀:</label>
+            <input type="number" step="any" name="d0" required>
+        </div>
+        <div class="form-group">
+            <label>d₀ Unit:</label>
+            <select name="d0_unit">
+                <option value="m">meters</option>
+                <option value="km">kilometers</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Path Loss Exponent (n):</label>
+            <input type="number" step="any" name="path_loss_exponent" required>
+        </div>
+
+        <div class="form-group">
+            <label>Time Slots per Carrier:</label>
+            <input type="number" name="time_slots_per_carrier" required>
+        </div>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if inputs %}
+    <div class="result-section">
+        <p>📥 <strong>Inputs:</strong></p>
+        <ul>
+            {% for key, value in inputs.items() %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <div class="result-section">
+        <p>📊 <strong>Results:</strong></p>
+        <ul>
+            {% for key, value in results.items() %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if explanation %}
+    <div class="result-section">
+        <p>🧠 <strong>Explanation:</strong></p>
+        <p>{{ explanation }}</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <a href="/" class="back-button">← Back to Home</a>
+</div>
+
+</body>
+</html>

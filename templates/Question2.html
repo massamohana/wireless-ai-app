@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 2 – OFDM Transmission</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>OFDM Transmission</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label>Bandwidth per RB:</label>
+            <input type="number" step="any" name="bandwidth_rb" required>
+        </div>
+        <div class="form-group">
+            <label>Bandwidth Unit:</label>
+            <select name="bandwidth_rb_unit">
+                <option value="kHz">kHz</option>
+                <option value="Hz">Hz</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Subcarrier Spacing:</label>
+            <input type="number" step="any" name="subcarrier_spacing" required>
+        </div>
+        <div class="form-group">
+            <label>Subcarrier Unit:</label>
+            <select name="subcarrier_spacing_unit">
+                <option value="kHz">kHz</option>
+                <option value="Hz">Hz</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Number of OFDM Symbols:</label>
+            <input type="number" name="num_ofdm_symbols" required>
+        </div>
+
+        <div class="form-group">
+            <label>Duration per RB:</label>
+            <input type="number" step="any" name="duration_rb" required>
+        </div>
+        <div class="form-group">
+            <label>Duration Unit:</label>
+            <select name="duration_rb_unit">
+                <option value="ms">ms</option>
+                <option value="seconds">seconds</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Modulation Order:</label>
+            <input type="number" name="modulation_order" required>
+        </div>
+
+        <div class="form-group">
+            <label>Parallel Resource Blocks:</label>
+            <input type="number" name="num_parallel_rb" required>
+        </div>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if inputs %}
+    <div class="result-section">
+        <p>📥 <strong>Inputs Provided:</strong></p>
+        <ul>
+            {% for key, value in inputs.items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <div class="result-section">
+        <p>📊 <strong>Results:</strong></p>
+        <ul>
+            {% for key, value in results.items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if explanation %}
+    <div class="result-section">
+        <p>ℹ️ <strong>Explanation:</strong></p>
+        <p>{{ explanation }}</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <a href="/" class="back-button">← Back to Home</a>
+</div>
+
+</body>
+</html>

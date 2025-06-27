@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 1 – Wireless Communication System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Wireless Communication System</h2>
+
+        <form method="POST">
+            <div class="form-group">
+                <label>Signal Bandwidth:</label>
+                <input type="number" step="any" name="signal_bandwidth" required>
+            </div>
+            <div class="form-group">
+                <label>Bandwidth Unit:</label>
+                <select name="signal_bandwidth_unit">
+                    <option value="Hz">Hz</option>
+                    <option value="kHz">kHz</option>
+                    <option value="MHz">MHz</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Quantizer Bits:</label>
+                <input type="number" name="quantizer_bits" required>
+            </div>
+
+            <div class="form-group">
+                <label>Source Encoder Compression Rate:</label>
+                <input type="number" step="any" name="source_encoder" required>
+            </div>
+
+            <div class="form-group">
+                <label>Channel Encoder Rate:</label>
+                <input type="number" step="any" name="channel_encoder" required>
+            </div>
+
+            <div class="form-group">
+                <label>Interleaver Bits:</label>
+                <input type="number" name="interleaver_bits" required>
+            </div>
+
+            <div class="form-group">
+                <label>Overhead Bits:</label>
+                <input type="number" step="any" name="overhead_bits" required>
+            </div>
+
+            <div class="form-group">
+                <label>Voice Duration (ms):</label>
+                <input type="number" step="any" name="speech_duration" required>
+            </div>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if inputs %}
+        <div class="result-section">
+            <p>📥 <strong>Inputs Provided:</strong></p>
+            <ul>
+                {% for key, value in inputs.items() %}
+                    <li>{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if results %}
+        <div class="result-section">
+            <p>📊 <strong>Results:</strong></p>
+            <ul>
+                {% for key, value in results.items() %}
+                    <li>{{ key }}: {{ value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% if explanation %}
+        <div class="result-section">
+            <p>ℹ️ <strong>Explanation:</strong></p>
+            <p>{{ explanation }}</p>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <div style="text-align: center;">
+            <a href="/" class="back-button">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

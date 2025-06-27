@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question 3 – Link Budget Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Link Budget Calculator</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label>Path Loss (L<sub>p</sub>) [dB]:</label>
+            <input type="number" name="L_p" step="any" required value="{{ request.form.get('L_p', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Transmit Antenna Gain (G<sub>t</sub>) [dB]:</label>
+            <input type="number" name="G_t" step="any" required value="{{ request.form.get('G_t', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Receive Antenna Gain (G<sub>r</sub>) [dB]:</label>
+            <input type="number" name="G_r" step="any" required value="{{ request.form.get('G_r', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Data Rate (R):</label>
+            <input type="number" name="R" step="any" required value="{{ request.form.get('R', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Rate Unit:</label>
+            <select name="R_unit">
+                <option value="bps" {% if request.form.get('R_unit') == 'bps' %}selected{% endif %}>bps</option>
+                <option value="kbps" {% if request.form.get('R_unit') == 'kbps' %}selected{% endif %}>kbps</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Other Losses (L<sub>o</sub>) [dB]:</label>
+            <input type="number" name="L_o" step="any" required value="{{ request.form.get('L_o', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Feed Line Loss (L<sub>f</sub>) [dB]:</label>
+            <input type="number" name="L_f" step="any" required value="{{ request.form.get('L_f', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Fade Margin (F<sub>margin</sub>) [dB]:</label>
+            <input type="number" name="F_margin" step="any" required value="{{ request.form.get('F_margin', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Transmit Amplifier Gain (A<sub>t</sub>) [dB]:</label>
+            <input type="number" name="A_t" step="any" required value="{{ request.form.get('A_t', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Receive Amplifier Gain (A<sub>r</sub>) [dB]:</label>
+            <input type="number" name="A_r" step="any" required value="{{ request.form.get('A_r', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Noise Figure (N<sub>f</sub>) [dB]:</label>
+            <input type="number" name="N_f" step="any" required value="{{ request.form.get('N_f', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Noise Temperature (T) [Kelvin]:</label>
+            <input type="number" name="T" step="any" required value="{{ request.form.get('T', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Link Margin [dB]:</label>
+            <input type="number" name="link_margin" step="any" required value="{{ request.form.get('link_margin', '') }}">
+        </div>
+        <div class="form-group">
+            <label>Frequency [Hz]:</label>
+            <input type="number" name="frequency" step="any" required value="{{ request.form.get('frequency', '') }}">
+        </div>
+        <div class="form-group">
+            <label>(E<sub>b</sub>/N<sub>0</sub>) [dB]:</label>
+            <input type="number" name="SNR_per_bit" step="any" required value="{{ request.form.get('SNR_per_bit', '') }}">
+        </div>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if inputs %}
+    <div class="result-section">
+        <h3>📥 Inputs</h3>
+        <ul>
+            {% for key, value in inputs.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if results %}
+    <div class="result-section">
+        <h3>📤 Results</h3>
+        <ul>
+            {% for key, value in results.items() %}
+            <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if explanation %}
+    <div class="result-section">
+        <h3>🧠 Explanation</h3>
+        <p>{{ explanation }}</p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+    <a href="/" class="back-button">← Back to Home</a>
+</div>
+
+</body>
+</html>
